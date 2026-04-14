@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Material de Apoyo — La Comunicación</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink:      #0f1923;
+    --ink-soft: #3a4a5a;
+    --paper:    #f5f0e8;
+    --cream:    #ede8df;
+    --rule:     #c8bfaf;
+    --navy:     #1a3c6e;
+    --blue:     #2e6da4;
+    --sky:      #d6e8f7;
+    --gold:     #c9860a;
+    --gold-lt:  #fdf3dc;
+    --red:      #b83232;
+    --green:    #1a6e4a;
+    --green-lt: #d4efe3;
+    --white:    #ffffff;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.6;
+    font-size: 15px;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--navy);
+    color: #fff;
+    padding: 3rem 2rem 2.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -80px;
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.04);
+  }
+  header::after {
+    content: '';
+    position: absolute;
+    bottom: -40px; left: 40%;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    background: rgba(46,109,164,0.35);
+  }
+  .header-inner { max-width: 900px; margin: 0 auto; position: relative; z-index: 1; }
+  .header-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: #7eb8e8;
+    text-transform: uppercase;
+    margin-bottom: 0.6rem;
+  }
+  header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3.4rem);
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 0.6rem;
+  }
+  header p {
+    font-size: 14px;
+    color: #a8c8e8;
+    font-weight: 300;
+  }
+
+  /* ── NAV TABS ── */
+  nav {
+    background: var(--cream);
+    border-bottom: 2px solid var(--rule);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+  .nav-inner {
+    max-width: 900px; margin: 0 auto;
+    display: flex; gap: 0; overflow-x: auto;
+  }
+  .nav-inner::-webkit-scrollbar { height: 3px; }
+  .nav-inner::-webkit-scrollbar-thumb { background: var(--blue); }
+  .tab-btn {
+    padding: 0.85rem 1.2rem;
+    border: none; background: none;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px; font-weight: 500;
+    color: var(--ink-soft);
+    cursor: pointer;
+    white-space: nowrap;
+    border-bottom: 3px solid transparent;
+    margin-bottom: -2px;
+    transition: all .2s;
+    position: relative;
+  }
+  .tab-btn:hover { color: var(--navy); }
+  .tab-btn.active { color: var(--navy); border-bottom-color: var(--navy); font-weight: 600; }
+  .tab-num {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 18px; height: 18px; border-radius: 50%;
+    background: var(--sky); color: var(--navy);
+    font-size: 10px; font-family: 'DM Mono', monospace;
+    margin-right: 6px;
+  }
+  .tab-btn.active .tab-num { background: var(--navy); color: #fff; }
+
+  /* ── MAIN ── */
+  main { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+
+  .section { display: none; }
+  .section.active { display: block; animation: fadeUp .35s ease; }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── SECTION TITLE ── */
+  .sec-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.9rem;
+    color: var(--navy);
+    margin-bottom: 1.6rem;
+    padding-bottom: 0.7rem;
+    border-bottom: 2px solid var(--rule);
+    display: flex; align-items: center; gap: 0.6rem;
+  }
+  .sec-title .ico { font-size: 1.5rem; }
+
+  /* ── CARDS GRID ── */
+  .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px,1fr)); gap: 1rem; margin-bottom: 1.5rem; }
+  .card {
+    background: var(--white);
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    padding: 1.1rem 1.2rem;
+    border-left: 4px solid var(--navy);
+    transition: transform .2s, box-shadow .2s;
+  }
+  .card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.08); }
+  .card-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px; letter-spacing: 2px;
+    color: var(--blue); text-transform: uppercase;
+    margin-bottom: 0.3rem;
+  }
+  .card h3 { font-size: 1rem; color: var(--navy); margin-bottom: 0.4rem; }
+  .card p { font-size: 13px; color: var(--ink-soft); line-height: 1.55; }
+  .card .example {
+    margin-top: 0.6rem;
+    font-size: 12px; font-style: italic;
+    color: var(--gold); font-weight: 500;
+  }
+  .card.accent-gold { border-left-color: var(--gold); }
+  .card.accent-red  { border-left-color: var(--red); }
+  .card.accent-green{ border-left-color: var(--green); }
+
+  /* ── TABLES ── */
+  .table-wrap { overflow-x: auto; margin-bottom: 1.5rem; border-radius: 8px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  table { width: 100%; border-collapse: collapse; background: var(--white); font-size: 13px; }
+  thead tr { background: var(--navy); color: #fff; }
+  thead th { padding: 0.8rem 1rem; text-align: left; font-weight: 600; font-size: 12px; letter-spacing: 0.5px; }
+  tbody tr:nth-child(odd)  { background: var(--white); }
+  tbody tr:nth-child(even) { background: var(--sky); }
+  tbody tr:hover { background: #d0e3f5; }
+  td { padding: 0.65rem 1rem; color: var(--ink); vertical-align: top; border-bottom: 1px solid var(--rule); }
+  td:first-child { font-weight: 600; color: var(--navy); }
+  .tag {
+    display: inline-block; padding: 2px 8px; border-radius: 12px;
+    font-size: 11px; font-weight: 600;
+  }
+  .tag-trad { background: #e8d5f0; color: #5a1a8a; }
+  .tag-dig  { background: var(--green-lt); color: var(--green); }
+  .tag-low  { background: #fde8e8; color: var(--red); }
+  .tag-high { background: var(--green-lt); color: var(--green); }
+
+  /* ── GLOSSARY ── */
+  .glossary { columns: 2; column-gap: 1.5rem; }
+  @media (max-width: 600px) { .glossary { columns: 1; } }
+  .gloss-item {
+    break-inside: avoid;
+    margin-bottom: 0.9rem;
+    padding: 0.75rem 1rem;
+    background: var(--white);
+    border-radius: 6px;
+    border: 1px solid var(--rule);
+  }
+  .gloss-term {
+    font-weight: 700; color: var(--navy); font-size: 14px;
+    border-bottom: 1px dotted var(--rule); margin-bottom: 0.3rem; padding-bottom: 0.3rem;
+  }
+  .gloss-def { font-size: 12.5px; color: var(--ink-soft); line-height: 1.5; }
+
+  /* ── Q&A ── */
+  .qa-list { display: flex; flex-direction: column; gap: 0.8rem; }
+  .qa-item { background: var(--white); border: 1px solid var(--rule); border-radius: 8px; overflow: hidden; }
+  .qa-q {
+    padding: 0.9rem 1.1rem;
+    background: var(--navy); color: #fff;
+    font-weight: 600; font-size: 13.5px;
+    cursor: pointer;
+    display: flex; justify-content: space-between; align-items: center;
+    gap: 1rem;
+    user-select: none;
+  }
+  .qa-q:hover { background: #1e4a80; }
+  .qa-arrow { font-size: 12px; transition: transform .25s; flex-shrink: 0; }
+  .qa-item.open .qa-arrow { transform: rotate(180deg); }
+  .qa-a {
+    padding: 0; max-height: 0; overflow: hidden;
+    transition: max-height .35s ease, padding .25s;
+    font-size: 13.5px; color: var(--ink-soft); line-height: 1.65;
+  }
+  .qa-item.open .qa-a { max-height: 300px; padding: 1rem 1.1rem; }
+
+  /* ── PROCESS DIAGRAM ── */
+  .process {
+    display: flex; align-items: center; flex-wrap: wrap;
+    gap: 0; margin-bottom: 1.5rem;
+    background: var(--white); border: 1px solid var(--rule);
+    border-radius: 10px; padding: 1.2rem 1rem; overflow-x: auto;
+  }
+  .proc-step {
+    display: flex; flex-direction: column; align-items: center;
+    padding: 0.6rem 0.8rem; text-align: center; min-width: 80px;
+  }
+  .proc-icon {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: var(--navy); color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; margin-bottom: 0.4rem;
+  }
+  .proc-icon.red { background: var(--red); }
+  .proc-icon.gold { background: var(--gold); }
+  .proc-label { font-size: 11px; font-weight: 600; color: var(--navy); }
+  .proc-arrow { color: var(--rule); font-size: 20px; padding: 0 0.2rem; margin-top: -10px; }
+
+  /* ── PILLS ROW ── */
+  .pills { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.2rem; }
+  .pill {
+    padding: 0.35rem 0.9rem; border-radius: 20px;
+    font-size: 12.5px; font-weight: 500; cursor: default;
+  }
+  .pill-navy  { background: var(--navy); color: #fff; }
+  .pill-blue  { background: var(--sky); color: var(--navy); }
+  .pill-gold  { background: var(--gold-lt); color: var(--gold); }
+  .pill-green { background: var(--green-lt); color: var(--green); }
+
+  /* ── NOTICE ── */
+  .notice {
+    background: var(--gold-lt); border: 1px solid #e8c870; border-left: 4px solid var(--gold);
+    border-radius: 6px; padding: 0.8rem 1rem; font-size: 13px; color: #6b4a00;
+    margin-bottom: 1.4rem;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    text-align: center; padding: 1.5rem;
+    font-size: 12px; color: var(--rule);
+    border-top: 1px solid var(--rule);
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="header-tag">Tema 1 · Comunicación · Material de Apoyo</div>
+    <h1>Guía de Estudio</h1>
+    <p>Resumen · Cuadros comparativos · Glosario · Preguntas de examen</p>
+  </div>
+</header>
+
+<nav>
+  <div class="nav-inner">
+    <button class="tab-btn active" onclick="show('resumen',this)">
+      <span class="tab-num">1</span>Resumen
+    </button>
+    <button class="tab-btn" onclick="show('elementos',this)">
+      <span class="tab-num">2</span>Elementos
+    </button>
+    <button class="tab-btn" onclick="show('tipos',this)">
+      <span class="tab-num">3</span>Tipos
+    </button>
+    <button class="tab-btn" onclick="show('medios',this)">
+      <span class="tab-num">4</span>Medios
+    </button>
+    <button class="tab-btn" onclick="show('glosario',this)">
+      <span class="tab-num">5</span>Glosario
+    </button>
+    <button class="tab-btn" onclick="show('preguntas',this)">
+      <span class="tab-num">6</span>Preguntas
+    </button>
+  </div>
+</nav>
+
+<main>
+
+  <!-- ══ 1. RESUMEN ══ -->
+  <section id="resumen" class="section active">
+    <h2 class="sec-title"><span class="ico">📋</span>Resumen General</h2>
+
+    <div class="notice">
+      💡 <strong>Definición clave:</strong> La comunicación es un proceso dinámico, bidireccional e intencional mediante el cual dos o más partes intercambian mensajes codificados a través de canales específicos, dentro de un contexto que condiciona su producción e interpretación.
+    </div>
+
+    <div class="process">
+      <div class="proc-step">
+        <div class="proc-icon">👤</div>
+        <div class="proc-label">EMISOR</div>
+      </div>
+      <div class="proc-arrow">→</div>
+      <div class="proc-step">
+        <div class="proc-icon">⌨️</div>
+        <div class="proc-label">CODIFICA</div>
+      </div>
+      <div class="proc-arrow">→</div>
+      <div class="proc-step">
+        <div class="proc-icon">📡</div>
+        <div class="proc-label">CANAL</div>
+      </div>
+      <div class="proc-arrow">→</div>
+      <div class="proc-step">
+        <div class="proc-icon">🔍</div>
+        <div class="proc-label">DECODIFICA</div>
+      </div>
+      <div class="proc-arrow">→</div>
+      <div class="proc-step">
+        <div class="proc-icon">👥</div>
+        <div class="proc-label">RECEPTOR</div>
+      </div>
+      <div class="proc-arrow" style="color:#c9860a">↩</div>
+      <div class="proc-step">
+        <div class="proc-icon gold">↩️</div>
+        <div class="proc-label">RETROALIM.</div>
+      </div>
+      <div style="margin-left:auto; align-self:center; display:flex; flex-direction:column; align-items:center; gap:4px; padding: 0 0.5rem;">
+        <div class="proc-icon red" style="width:36px;height:36px;font-size:15px;">⚠️</div>
+        <div class="proc-label" style="color:#b83232">RUIDO</div>
+      </div>
+    </div>
+
+    <div class="pills">
+      <span class="pill pill-navy">Verbal</span>
+      <span class="pill pill-navy">No Verbal</span>
+      <span class="pill pill-blue">Oral</span>
+      <span class="pill pill-blue">Escrita</span>
+      <span class="pill pill-blue">Visual</span>
+      <span class="pill pill-gold">Intrapersonal</span>
+      <span class="pill pill-gold">Interpersonal</span>
+      <span class="pill pill-gold">Grupal</span>
+      <span class="pill pill-gold">Masiva</span>
+      <span class="pill pill-green">Unidireccional</span>
+      <span class="pill pill-green">Bidireccional</span>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr>
+          <th>Aspecto</th><th>Descripción breve</th><th>Ejemplo</th>
+        </tr></thead>
+        <tbody>
+          <tr><td>Etimología</td><td>Del latín communicare = hacer común</td><td>Compartir una idea</td></tr>
+          <tr><td>8 Elementos</td><td>Emisor, receptor, mensaje, canal, código, contexto, retroalimentación, ruido</td><td>Proceso de una llamada telefónica</td></tr>
+          <tr><td>Tipos (código)</td><td>Verbal y no verbal</td><td>Hablar / gesticular</td></tr>
+          <tr><td>Tipos (canal)</td><td>Oral, escrita, visual</td><td>Voz, carta, infografía</td></tr>
+          <tr><td>Tipos (participantes)</td><td>Intrapersonal, interpersonal, grupal, masiva</td><td>Reflexión / debate / TV</td></tr>
+          <tr><td>Tipos (dirección)</td><td>Unidireccional vs. bidireccional</td><td>Radio vs. videollamada</td></tr>
+          <tr><td>Medios tradicionales</td><td>Prensa, radio, TV, cine</td><td>Periódico El Tiempo</td></tr>
+          <tr><td>Medios digitales</td><td>Internet, redes sociales, podcasts, mensajería</td><td>Instagram, Spotify</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ══ 2. ELEMENTOS ══ -->
+  <section id="elementos" class="section">
+    <h2 class="sec-title"><span class="ico">🔩</span>Elementos del Proceso</h2>
+    <div class="cards">
+      <div class="card">
+        <div class="card-label">Elemento 1</div>
+        <h3>👤 Emisor</h3>
+        <p>Sujeto u organización que origina, codifica y transmite el mensaje con una intención determinada.</p>
+        <div class="example">Ej: El presentador de un noticiero.</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Elemento 2</div>
+        <h3>👥 Receptor</h3>
+        <p>Quien recibe, decodifica e interpreta el mensaje según su experiencia, cultura y contexto propio.</p>
+        <div class="example">Ej: La audiencia del noticiero.</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Elemento 3</div>
+        <h3>💬 Mensaje</h3>
+        <p>El contenido mismo de la comunicación: la idea, emoción o información que se desea transmitir.</p>
+        <div class="example">Ej: La noticia sobre el estado del tiempo.</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Elemento 4</div>
+        <h3>📡 Canal</h3>
+        <p>Medio físico o tecnológico a través del cual viaja el mensaje entre el emisor y el receptor.</p>
+        <div class="example">Ej: La señal de televisión.</div>
+      </div>
+      <div class="card accent-gold">
+        <div class="card-label">Elemento 5</div>
+        <h3>🔤 Código</h3>
+        <p>Sistema de signos y reglas compartido por emisor y receptor. Sin código común no hay comprensión posible.</p>
+        <div class="example">Ej: El idioma español, las señales de tránsito.</div>
+      </div>
+      <div class="card accent-gold">
+        <div class="card-label">Elemento 6</div>
+        <h3>🌍 Contexto</h3>
+        <p>Circunstancias físicas, sociales, culturales e históricas que condicionan la producción e interpretación del mensaje.</p>
+        <div class="example">Ej: Una ironía en una reunión formal.</div>
+      </div>
+      <div class="card accent-green">
+        <div class="card-label">Elemento 7</div>
+        <h3>↩️ Retroalimentación</h3>
+        <p>Respuesta del receptor al emisor. Convierte la transmisión en un proceso bidireccional real.</p>
+        <div class="example">Ej: Comentarios en redes sociales.</div>
+      </div>
+      <div class="card accent-red">
+        <div class="card-label">Elemento 8</div>
+        <h3>⚠️ Ruido</h3>
+        <p>Cualquier interferencia que distorsiona el mensaje. Puede ser físico, semántico o psicológico.</p>
+        <div class="example">Ej: Mala conexión, jerga desconocida, distracción.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 3. TIPOS ══ -->
+  <section id="tipos" class="section">
+    <h2 class="sec-title"><span class="ico">🗂️</span>Tipos de Comunicación</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr>
+          <th>Tipo</th><th>Criterio</th><th>Características</th><th>Ejemplo</th>
+        </tr></thead>
+        <tbody>
+          <tr><td>Verbal</td><td>Por código</td><td>Usa lenguaje articulado (oral o escrito). Precisa y estructurada.</td><td>Conferencia, contrato, chat</td></tr>
+          <tr><td>No verbal</td><td>Por código</td><td>Gestos, expresiones faciales, postura, proxémica, paralenguaje.</td><td>Sonrisa, cruzar los brazos</td></tr>
+          <tr><td>Oral</td><td>Por canal</td><td>Voz en tiempo real. Inmediata, efímera y rica en matices.</td><td>Llamada telefónica, clase presencial</td></tr>
+          <tr><td>Escrita</td><td>Por canal</td><td>Signos gráficos. Permanente y verificable.</td><td>Correo electrónico, contrato, libro</td></tr>
+          <tr><td>Visual</td><td>Por canal</td><td>Imágenes y colores. Impacto rápido e inmediato.</td><td>Semáforo, infografía, logo</td></tr>
+          <tr><td>Intrapersonal</td><td>Por participantes</td><td>Diálogo interno del individuo consigo mismo.</td><td>Planificación mental, reflexión</td></tr>
+          <tr><td>Interpersonal</td><td>Por participantes</td><td>Entre dos personas de manera directa. La más cotidiana.</td><td>Conversación íntima, entrevista</td></tr>
+          <tr><td>Grupal</td><td>Por participantes</td><td>En colectivo reducido donde todos pueden interactuar.</td><td>Reunión de trabajo, seminario</td></tr>
+          <tr><td>Masiva</td><td>Por participantes</td><td>Pocos emisores transmiten a grandes audiencias heterogéneas.</td><td>Televisión, radio, periódico</td></tr>
+          <tr><td>Unidireccional</td><td>Por dirección</td><td>El mensaje fluye en un solo sentido. Sin respuesta inmediata.</td><td>Anuncio publicitario en radio</td></tr>
+          <tr><td>Bidireccional</td><td>Por dirección</td><td>Existe intercambio mutuo entre emisor y receptor.</td><td>Videollamada, debate, chat</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ══ 4. MEDIOS ══ -->
+  <section id="medios" class="section">
+    <h2 class="sec-title"><span class="ico">📺</span>Medios de Comunicación</h2>
+
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:1.4rem;">
+      <div>
+        <h3 style="font-size:14px;color:var(--navy);font-weight:700;margin-bottom:0.7rem;padding-bottom:0.4rem;border-bottom:2px solid var(--rule);">📰 Medios Tradicionales</h3>
+        <div style="display:flex;flex-direction:column;gap:0.5rem;">
+          <div class="card" style="padding:0.7rem 0.9rem;">
+            <h3 style="font-size:13px;">📰 Prensa escrita</h3>
+            <p style="font-size:12px;">Análisis profundo, permanencia del mensaje, credibilidad editorial.</p>
+          </div>
+          <div class="card" style="padding:0.7rem 0.9rem;">
+            <h3 style="font-size:13px;">📻 Radio</h3>
+            <p style="font-size:12px;">Inmediatez, amplio alcance geográfico, accesible sin internet.</p>
+          </div>
+          <div class="card" style="padding:0.7rem 0.9rem;">
+            <h3 style="font-size:13px;">📺 Televisión</h3>
+            <p style="font-size:12px;">Imagen + sonido, mayor impacto emocional, dominio masivo.</p>
+          </div>
+          <div class="card" style="padding:0.7rem 0.9rem;">
+            <h3 style="font-size:13px;">🎬 Cine</h3>
+            <p style="font-size:12px;">Narrativa larga, transmite valores e ideología, experiencia colectiva.</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <h3 style="font-size:14px;color:var(--green);font-weight:700;margin-bottom:0.7rem;padding-bottom:0.4rem;border-bottom:2px solid var(--rule);">🌐 Medios Digitales</h3>
+        <div style="display:flex;flex-direction:column;gap:0.5rem;">
+          <div class="card accent-green" style="padding:0.7rem 0.9rem;">
+            <h3 style="font-size:13px;">🌐 Internet / Portales</h3>
+            <p style="font-size:12px;">Multimedia, interactivo, consulta en tiempo real y actualización constante.</p>
+          </div>
+          <div class="card accent-green" style="padding:0.7rem 0.9rem;">
+            <h3 style="font-size:13px;">📱 Redes Sociales</h3>
+            <p style="font-size:12px;">Usuario = emisor Y receptor. Contenido viral e instantáneo.</p>
+          </div>
+          <div class="card accent-green" style="padding:0.7rem 0.9rem;">
+            <h3 style="font-size:13px;">🎙 Podcasts / Streaming</h3>
+            <p style="font-size:12px;">Consumo personalizado a demanda. Spotify, YouTube, Netflix.</p>
+          </div>
+          <div class="card accent-green" style="padding:0.7rem 0.9rem;">
+            <h3 style="font-size:13px;">💬 Mensajería instantánea</h3>
+            <p style="font-size:12px;">Multimodal (texto, voz, video). WhatsApp, Telegram, Signal.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3 style="font-size:1rem;color:var(--navy);font-weight:700;margin-bottom:0.8rem;">Comparativa: Tradicionales vs. Digitales</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr>
+          <th>Criterio</th><th>Medios Tradicionales</th><th>Medios Digitales</th>
+        </tr></thead>
+        <tbody>
+          <tr>
+            <td>Interactividad</td>
+            <td><span class="tag tag-low">Baja / Unidireccional</span></td>
+            <td><span class="tag tag-high">Alta / Multidireccional</span></td>
+          </tr>
+          <tr>
+            <td>Costo de producción</td>
+            <td><span class="tag tag-low">Elevado</span></td>
+            <td><span class="tag tag-high">Bajo o gratuito</span></td>
+          </tr>
+          <tr>
+            <td>Velocidad</td>
+            <td>Horas o días</td>
+            <td>Instantánea (tiempo real)</td>
+          </tr>
+          <tr>
+            <td>Verificación</td>
+            <td>Proceso editorial formal</td>
+            <td>Responsabilidad del usuario</td>
+          </tr>
+          <tr>
+            <td>Rol del receptor</td>
+            <td>Audiencia pasiva</td>
+            <td><strong>Prosumidor</strong> (produce + consume)</td>
+          </tr>
+          <tr>
+            <td>Alcance</td>
+            <td>Local o nacional</td>
+            <td>Global</td>
+          </tr>
+          <tr>
+            <td>Personalización</td>
+            <td>Masiva, poco personalizada</td>
+            <td>Algorítmica y personalizada</td>
+          </tr>
+          <tr>
+            <td>Ejemplos</td>
+            <td>Prensa, radio, TV, cine</td>
+            <td>Redes sociales, podcasts, streaming</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="notice">
+      🔑 <strong>Concepto clave — Prosumidor:</strong> Término acuñado por Alvin Toffler. En el ecosistema digital, el receptor ya no es pasivo: también produce contenido. Cualquier usuario con un teléfono puede publicar a una audiencia global.
+    </div>
+  </section>
+
+  <!-- ══ 5. GLOSARIO ══ -->
+  <section id="glosario" class="section">
+    <h2 class="sec-title"><span class="ico">📖</span>Glosario de Conceptos Clave</h2>
+    <div class="glossary">
+      <div class="gloss-item">
+        <div class="gloss-term">Comunicación</div>
+        <div class="gloss-def">Proceso dinámico y bidireccional de intercambio de mensajes codificados que busca construir significados compartidos entre dos o más participantes.</div>
+      </div>
+      <div class="gloss-item">
+        <div class="gloss-term">Emisor</div>
+        <div class="gloss-def">Sujeto u organización que origina y transmite el mensaje dentro del proceso comunicativo.</div>
+      </div>
+      <div class="gloss-item">
+        <div class="gloss-term">Receptor</div>
+        <div class="gloss-def">Sujeto o entidad que recibe, decodifica e interpreta el mensaje.</div>
+      </div>
+      <div class="gloss-item">
+        <div class="gloss-term">Mensaje</div>
+        <div class="gloss-def">Contenido de la comunicación; la información, idea o emoción que se desea transmitir.</div>
+      </div>
+      <div class="gloss-item">
+        <div class="gloss-term">Canal</div>
+        <div class="gloss-def">Medio físico o tecnológico a través del cual viaja el mensaje entre emisor y receptor.</div>
+      </div>
+      <div class="gloss-item">
+        <div class="gloss-term">Código</div>
+        <div class="gloss-def">Sistema de signos y reglas que emisor y receptor deben compartir para que la comunicación sea posible.</div>
+      </div>
+      <div class="gloss-item">
+        <div class="gloss-term">Contexto</div>
+        <div class="gloss-def">Conjunto de circunstancias —físicas, sociales, culturales, históricas— que rodean y condicionan el proceso comunicativo.</div>
+      </div>
+      <div class="gloss-item">
+        <div class="gloss-term">Retroalimentación</div>
+        <div class="gloss-def">Respuesta del receptor que permite al emisor ajustar o confirmar la comprensión del mensaje.</div>
+      </div>
+      <div class="gloss-item">
+        <div class="gloss-term">Ruido</div>
+        <div class="gloss-def">Cualquier factor (físico, semántico, psicológico o tecnológico) que interfiere con la transmisión o comprensión del mensaje.</div>
+      </div>
+      <div class="gloss-item">
+        <div class="gloss-term">Comunicación no verbal</div>
+        <div class="gloss-def">Forma de comunicación basada en gestos, expresiones faciales, postura corporal y paralenguaje.</div>
+      </div>
+      <div class="gloss-item">
+        <div class="gloss-term">Prosumidor</div>
+        <div class="gloss-def">Individuo que actúa simultáneamente como productor y consumidor de contenido mediático, especialmente en entornos digitales.</div>
+      </div>
+      <div class="gloss-item">
+        <div class="gloss-term">Proxémica</div>
+        <div class="gloss-def">Estudio del uso del espacio físico como elemento de comunicación no verbal.</div>
+      </div>
+      <div class="gloss-item">
+        <div class="gloss-term">Paralenguaje</div>
+        <div class="gloss-def">Elementos vocales no verbales —tono, timbre, volumen, velocidad— que acompañan el lenguaje oral y modifican su significado.</div>
+      </div>
+      <div class="gloss-item">
+        <div class="gloss-term">Comunicación masiva</div>
+        <div class="gloss-def">Proceso en el que pocos emisores transmiten mensajes a grandes audiencias heterogéneas a través de medios de comunicación.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 6. PREGUNTAS ══ -->
+  <section id="preguntas" class="section">
+    <h2 class="sec-title"><span class="ico">❓</span>Preguntas Tipo Examen</h2>
+    <p style="font-size:13px;color:var(--ink-soft);margin-bottom:1.2rem;">Haz clic en cada pregunta para ver la respuesta.</p>
+    <div class="qa-list">
+
+      <div class="qa-item">
+        <div class="qa-q" onclick="toggleQA(this)">
+          1. ¿Cuál es la diferencia entre comunicación y transmisión de información?
+          <span class="qa-arrow">▼</span>
+        </div>
+        <div class="qa-a">La transmisión implica un flujo unidireccional de datos sin necesidad de comprensión mutua. La comunicación, en cambio, es bidireccional y contextualizada: busca construir significados compartidos. La retroalimentación es el elemento que diferencia fundamentalmente ambos conceptos.</div>
+      </div>
+
+      <div class="qa-item">
+        <div class="qa-q" onclick="toggleQA(this)">
+          2. ¿Por qué el código es un elemento indispensable de la comunicación?
+          <span class="qa-arrow">▼</span>
+        </div>
+        <div class="qa-a">Sin un sistema de signos compartido entre emisor y receptor, el mensaje no puede ser decodificado. Si el emisor habla en chino mandarín y el receptor solo conoce español, no habrá comunicación efectiva aunque el canal funcione perfectamente. El código es la clave que hace posible el entendimiento.</div>
+      </div>
+
+      <div class="qa-item">
+        <div class="qa-q" onclick="toggleQA(this)">
+          3. ¿Qué papel juega el contexto en la interpretación de un mensaje?
+          <span class="qa-arrow">▼</span>
+        </div>
+        <div class="qa-a">El contexto es determinante para la interpretación. Una misma frase puede ser un elogio sincero o una ironía según las circunstancias, el tono de voz y la relación entre los interlocutores. El contexto incluye dimensiones físicas, psicológicas, sociales y culturales.</div>
+      </div>
+
+      <div class="qa-item">
+        <div class="qa-q" onclick="toggleQA(this)">
+          4. ¿Cuáles son los principales retos de los medios digitales?
+          <span class="qa-arrow">▼</span>
+        </div>
+        <div class="qa-a">Los principales retos incluyen: proliferación de desinformación y noticias falsas (fake news); burbujas de filtro algorítmicas; polarización discursiva; pérdida de privacidad; saturación informativa; y dificultad para verificar la autenticidad y confiabilidad de las fuentes.</div>
+      </div>
+
+      <div class="qa-item">
+        <div class="qa-q" onclick="toggleQA(this)">
+          5. Explique el concepto de prosumidor y su importancia actual.
+          <span class="qa-arrow">▼</span>
+        </div>
+        <div class="qa-a">El prosumidor (productor + consumidor) es el individuo que en el ecosistema digital ya no es solo receptor pasivo, sino también productor activo de contenidos. Las redes sociales y plataformas digitales permiten que cualquier persona publique a audiencias globales. Esto democratiza la comunicación pero descentraliza la responsabilidad editorial.</div>
+      </div>
+
+      <div class="qa-item">
+        <div class="qa-q" onclick="toggleQA(this)">
+          6. ¿Qué diferencia existe entre ruido físico y ruido semántico?
+          <span class="qa-arrow">▼</span>
+        </div>
+        <div class="qa-a">El ruido físico son interferencias externas y materiales: sonidos ambientales, fallas técnicas, mala señal. El ruido semántico se produce cuando hay problemas en la codificación o decodificación: uso de jerga desconocida, ambigüedad lingüística o diferencias culturales en el significado de las palabras.</div>
+      </div>
+
+      <div class="qa-item">
+        <div class="qa-q" onclick="toggleQA(this)">
+          7. ¿Cómo transformó Internet el modelo clásico de comunicación masiva?
+          <span class="qa-arrow">▼</span>
+        </div>
+        <div class="qa-a">El modelo clásico era predominantemente unidireccional: pocos emisores (grandes medios) transmitían a grandes audiencias pasivas. Internet introdujo la bidireccionalidad y la multimedialidad. Ahora cualquier usuario puede ser emisor, la retroalimentación es instantánea, y la distinción entre emisor y receptor se ha difuminado radicalmente.</div>
+      </div>
+
+      <div class="qa-item">
+        <div class="qa-q" onclick="toggleQA(this)">
+          8. ¿Por qué se afirma que la comunicación no verbal tiene un peso significativo en la comunicación humana?
+          <span class="qa-arrow">▼</span>
+        </div>
+        <div class="qa-a">En contextos de comunicación emocional, una parte importante del impacto del mensaje proviene de elementos no verbales como el tono de voz, las expresiones faciales y el lenguaje corporal. Estos canales transmiten información sobre el estado emocional e intenciones del emisor que el lenguaje verbal frecuentemente no expresa con la misma fidelidad.</div>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  Material de Apoyo · Tema 1: La Comunicación · Uso académico universitario
+</footer>
+
+<script>
+  function show(id, btn) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    btn.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function toggleQA(el) {
+    const item = el.closest('.qa-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.qa-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+</script>
+</body>
+</html>
